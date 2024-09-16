@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatroom</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<style>
+    body{
+        background-color: white;
+        justify-content: center;
+    }
+
+    .container{
+        margin-top: 200px;
+        max-width: 500px;
+    }
+
+    .message-container-userin{
+        padding: 5px;
+        background-color: lightgreen;
+        margin-right: 25%;
+        border-radius: 50px;
+        display: flex;
+    }
+
+    .message-container-userout{
+        padding: 5px;
+        background-color: lightblue;
+        margin-left: 25%;
+        border-radius: 50px;
+        display: flex;
+    }
+
+    .message-item{
+        flex: 80%;
+    }
+
+    .message-date{
+        flex: 20%;
+    }
+
+    .date-container{
+        text-align: center;
+        background-color: #bacbe6;
+        margin-left: 25%;
+        margin-right: 25%;
+        border-radius: 50px;
+        padding: 5px;
+    }
+
+    .DARK_MODE{
+        background-color: black;
+        color: white;
+    }
+
+    .LIGHT_MODE{
+        background-color: white;
+        color: black;
+    }
+
+</style>
+<body th:class="${mode}">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <div class="justify-content-start">
+                <a class="navbar-brand" href="/messaging/homescreen"><img src="/img/return.png" height="24px" width="30px" alt="return" class="img-fluid"></a>
+            </div>
+            <div class="navbar-nav" style="margin-right: 1000px; ">
+                <a th:href="@{/messaging/modifyName/{otherUser}(otherUser=${otherUser})}"><img class="img-fluid m-2" src="/img/user-2.png" alt="usericon" height="24px" width="30px"></a>
+                <span th:if="${modeItem == null}" th:text="${modifiedName}" class="m-2">#</span>
+                <span th:if="${modeItem}" th:text="${modifiedName}" class="m-2" style="color: black;">#</span>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div th:if="${userIn}">
+            <div th:each="c : ${conversation}">
+                <div class="date-container mb-3" th:text="${c.key.getDayOfMonth()} + '.' +${c.key.getMonth().name()} + ' ' +${c.key.getYear()}"></div>
+                <div th:each="message : ${c.value}">
+                    <div th:if="${message.userin} == ${userIn}" class="message-container-userin mb-2">
+                        <div class="message-item" th:text="${message.message}"></div>
+                        <div class="message-date" th:text="${message.displayHour()}"></div>
+                    </div>
+                    <div th:if="${message.userin} == ${userOut}" class="message-container-userout mb-2">
+                        <div class="message-item" th:text="${message.message}"></div>
+                        <div class="message-date" th:text="${message.displayHour()}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form th:action="@{/messaging/chat/room/message}" method="post" class="mt-5">
+            <input type="hidden" th:value="${otherUser}" name="otherUser">
+            <label for="area" hidden>Message</label>
+            <textarea name="message" id="area" draggable="false" class="form-control" placeholder="..message.."></textarea>
+            <button th:if="${modeItem == null}" type="submit" class="form-control btn btn-outline-dark">Send</button>
+            <button th:if="${modeItem}" type="submit" class="form-control btn btn-outline-light">Send</button>
+        </form>
+    </div>
+</body>
+</html>

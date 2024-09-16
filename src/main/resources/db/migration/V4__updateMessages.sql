@@ -1,0 +1,1 @@
+alter table messanger.Messages modify time timestamp;

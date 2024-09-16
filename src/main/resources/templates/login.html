@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/1bebea7d1c.js" crossorigin="anonymous"></script>
+</head>
+
+<style>
+
+    body{
+        max-width: 350px;
+        margin: 150px auto;
+    }
+
+    .background-icon{
+        background-repeat: no-repeat;
+        background-image: url("/img/messenger.png");
+        background-size: 200px;
+        background-position: center;
+    }
+
+    input{
+        border-style: solid;
+        border-top-color: white;
+        border-bottom-color: lightgray;
+        border-left-color: white;
+        border-right-color: lightgray;
+    }
+
+    button{
+
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    .usericon{
+        background-image: url("/img/user.png");
+        background-size: 20px;
+        background-repeat: no-repeat;
+        text-align: center;
+        background-position: 12px 12px;
+    }
+
+    .roundedBorder{
+        border-radius: 20px;
+    }
+
+    .passwordicon{
+        background-image: url("/img/unlock.png");
+        background-size: 20px;
+        background-repeat: no-repeat;
+        text-align: center;
+        background-position: 12px 12px;
+    }
+
+    .submiticon{
+        background-image: url("/img/check-mark.png");
+        background-size: 40px;
+        background-repeat: no-repeat;
+    }
+
+</style>
+
+<body class="container-fluid" style="background-color: lightgreen;">
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div>
+        <form th:action="@{/login}" method="post">
+            <div class="mb-5 background-icon" style="height: 200px;">
+
+            </div>
+            <div class="mb-5">
+                <label hidden for="exampleFormControlInput1" class="form-label">Username</label>
+                <input name="username" type="text" class="form-control-lg passwordicon roundedBorder w-100" id="exampleFormControlInput1" placeholder="Username">
+            </div>
+            <div class="mb-5">
+                <label hidden for="exampleFormControlTextarea1" class="form-label">Password</label>
+                <input name="password" type="password" class="form-control-lg usericon roundedBorder w-100" id="exampleFormControlTextarea1" placeholder="Password">
+            </div>
+            <div class="mb-2">
+                <button id="submitButton" class="btn-light w-100 roundedBorder form-control-lg submiticon submittransition" type="submit">Submit</button>
+            </div>
+            <div style="text-align: center;">
+                <a href="/registry"><small>Not signed in ? Click here</small></a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

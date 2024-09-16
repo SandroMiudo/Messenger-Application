@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ModifyContact</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<style>
+    .DARK_MODE{
+        background-color: black;
+        color: white;
+    }
+
+    .LIGHT_MODE{
+        background-color: white;
+        color: black;
+    }
+</style>
+<body th:class="${mode}">
+    <h1 class="mb-5">NameChanger</h1>
+    <form th:action="@{/messaging/modifyName/{otherUser}(otherUser=${otherUser})}" method="post">
+        <label class="form-label" for="inp">Modify Name</label>
+        <input name="modifiedName" type="text" id="inp" class="form-control mb-5">
+        <button type="submit" class="form-control mb-5">Change Name</button>
+    </form>
+</body>
+</html>

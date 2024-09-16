@@ -1,0 +1,1 @@
+alter table messanger.Contacts add column name varchar(30) default 'unknown';

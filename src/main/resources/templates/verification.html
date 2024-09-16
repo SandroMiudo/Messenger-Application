@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Verification</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+
+    input[type=text]{
+        width: 50px;
+        height: 50px;
+        text-align: center;
+    }
+
+    input[type=email]{
+        text-align: center;
+    }
+
+    .roundedBorder{
+        border-radius: 20px;
+    }
+
+    .background-icon{
+        background-repeat: no-repeat;
+        background-image: url("/img/messenger.png");
+        background-size: 200px;
+        background-position: center;
+    }
+
+    .gridcontainer{
+        text-align: center;
+        margin: auto auto;
+        display: grid;
+        grid-template-columns: 50px 50px 50px 50px 50px 50px;
+        gap: 10px;
+        grid-template-rows: 50px;
+        justify-content: center;
+    }
+
+    .griditem{
+        padding: 5px;
+        background-color: #badbcc;
+    }
+
+    h1{
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .center-all{
+        max-width: 500px;
+        width: 500px;
+        background: lightgray;
+        margin: 50px auto;
+    }
+
+</style>
+<body>
+<h1>Verification</h1>
+    <div class="container-fluid center-all">
+        <div class="background-icon" style="height: 200px;">
+
+        </div>
+        <div style="text-align: center;">
+            To access your account you have to verify your email first!<br>
+            We emailed to the following email : <span th:text="${email}"></span><p></p>
+            Please insert the code in here : <p></p>
+        </div>
+        <form th:action="@{/registry/user/verification}" method="post" class="mb-5">
+            <div class="gridcontainer mb-3">
+                <div class="griditem">
+                    <label hidden for="firstDigit">1.Digit</label>
+                    <input name="a" type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="firstDigit"/>
+                </div>
+                <div class="griditem">
+                    <label hidden for="secondDigit">2.Digit</label>
+                    <input name="b" type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="secondDigit"/>
+                </div>
+                <div class="griditem">
+                    <label hidden for="thirdDigit">3.Digit</label>
+                    <input name="c" type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="thirdDigit"/>
+                </div>
+                <div class="griditem">
+                    <label hidden for="fourthDigit">4.Digit</label>
+                    <input name="d" type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="fourthDigit"/>
+                </div>
+                <div class="griditem">
+                    <label hidden for="fifthDigit">5.Digit</label>
+                    <input name="e" type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="fifthDigit"/>
+                </div>
+                <div class="griditem">
+                    <label hidden for="sixthDigit">6.Digit</label>
+                    <input name="f" type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="sixthDigit"/>
+                </div>
+                <input type="hidden" name="verificationcode" th:value="${generatedNumber}">
+                <input type="hidden" name="username" th:value="${username}">
+            </div>
+            <button type="submit" class="btn btn-outline-light roundedBorder form-control">Verify</button>
+        </form>
+        <div th:if="${errorVerify}" class="alert alert-danger alert-dismissible fade show roundedBorder" role="alert">
+            <strong>Verification rejected!</strong> Verification-code is not correct!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div>
+            <form th:action="@{/registry/user/changeMail}" method="post">
+                Wrong email ? Click here to return to the register with a new mail<p></p>
+                <label hidden for="newEmailEx"></label>
+                <input class="form-control roundedBorder mb-3" name="email" type="email" placeholder="newexample@gmail.com" id="newEmailEx">
+                <input type="hidden" name="username" th:value="${username}">
+                <button type="submit" class="btn btn-outline-light roundedBorder form-control mb-3">Set new email</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

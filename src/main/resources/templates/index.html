@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messanger</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<style>
+    .flex-container{
+        margin-top: 100px;
+        margin-right: 200px;
+        margin-left: 200px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .flex-col{
+        padding: 20px;
+        flex-basis: 100%;
+        text-align: center;
+        border-radius: 50px;
+        border: solid 2px gray;
+    }
+
+    .flex-col a{
+        text-decoration: none;
+        color: dimgray;
+    }
+
+    .items{
+        display: block;
+    }
+    hr{
+        color: dimgray;
+        size: auto;
+    }
+    footer{
+    }
+
+    .LIGHT_MODE{
+        background-color: white;
+        color: black;
+    }
+
+    .DARK_MODE{
+        background-color: black;
+        color: white;
+    }
+
+</style>
+<body th:class="${mode}">
+    <div>
+        <h1>Chats</h1>
+        <form id="formid" action="" method="get" class="form-control">
+            <label hidden for="searchContact">Search</label>
+            <input type="search" list="datalist" id="searchContact" class="form-select" onchange="
+            document.getElementById('formid').setAttribute('action','/messaging/chat/room/'+this.value)">
+            <datalist id="datalist">
+                <option th:each="userout : ${messages}" th:text="${userout.modifiedName}"
+                        th:value="${userout.username}">#</option>
+            </datalist>
+        </form>
+        <div class="flex-container">
+            <div th:each="message : ${messages}" class="flex-col mb-3">
+                <a th:href="@{/messaging/chat/room/{otherUser}(otherUser=${message.username})}" class="items">
+                    <div class="mb-4">
+                        <span th:text="${message.modifiedName}" style="border: solid 2px gray;border-radius: 50px; padding: 10px;"></span>
+                        <span th:text="${message.message.displayTime()}" style="border: solid 2px gray;border-radius: 50px;padding: 10px;">#</span>
+                    </div>
+                    <div>
+                        <span th:text="${message.message.message}" style="margin-right: 20px;"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div th:if="${modeItem == null}" class="d-flex justify-content-center mt-3">
+            <a href="/messaging/addContact" role="button" class="btn btn-outline-dark m-1">Add contact</a>
+            <a href="/messaging/settings" role="button" class="btn btn-outline-dark m-1">Change Settings</a>
+        </div>
+        <div th:if="${modeItem}" class="d-flex justify-content-center mt-3">
+            <a href="/messaging/addContact" role="button" class="btn btn-light m-1">Add contact</a>
+            <a href="/messaging/settings" role="button" class="btn btn-light m-1">Change Settings</a>
+        </div>
+    </div>
+</body>
+</html>

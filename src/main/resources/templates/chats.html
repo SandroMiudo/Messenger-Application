@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chats</title>
+</head>
+<style>
+
+    body{
+
+    }
+
+    .flex-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin-left: 250px;
+        margin-top: 50px;
+    }
+
+    .sub-flex-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .sub-flex-item{
+        flex: 0 0 50px;
+        padding: 10px;
+        margin: 5px;
+        border: solid 2px dimgray;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    .flex-item{
+        flex: 0 0 500px;
+        padding: 20px;
+        margin-right: 50px;
+    }
+
+    a{
+        text-decoration: none;
+        color: dimgray;
+    }
+
+    a:hover{
+        background-color: #d1e7dd;
+    }
+</style>
+<body th:class="${mode}">
+    <div class="container-fluid">
+        <div class="flex-container">
+            <div class="flex-item">
+                <div class="sub-flex-container">
+                    <a th:each="contact : ${contacts}" class="sub-flex-item" th:href="@{/messaging/chat/room/{otherUser}(otherUser = ${contact.name})}"
+                       th:text="${contact.name}"></a>
+                </div>
+            </div>
+            <div class="flex-item">
+                <div class="sub-flex-container">
+                    <a href="" role="button" class="sub-flex-item btn btn-outline-dark">Sort By Name</a>
+                    <a href="" role="button" class="sub-flex-item btn btn-outline-dark">Sort By Time</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

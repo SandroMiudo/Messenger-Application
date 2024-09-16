@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail</title>
+</head>
+<style>
+    body{
+        background-color: lightyellow;
+    }
+    .inhalt{
+        margin: 20px;
+        height: 400px;
+        width: 400px;
+    }
+
+    .inhalt:hover{
+        height: 300px;
+    }
+
+    h1{
+        text-align: center;
+        text-shadow: 2px 2px 5px lightblue;
+    }
+    h1::first-letter{
+        font-size: 40px;
+        color: #842029;
+    }
+    h2::first-letter{
+        font-size: 40px;
+        color: #842029;
+    }
+</style>
+<body>
+    <div>
+        <h1>Verify your account</h1>
+        <div style="max-width: 500px;max-height: 700px;margin: auto;border: 5px solid #842029;">
+            <div class="inhalt">
+                <h2>Hello $user</h2>
+                To login to our page we have to verify you. Please do the following step to activate your account:
+                <div style="margin-top: 20px;margin-bottom: 20px;border: 5px solid #842029;padding: 5px;">
+                    In this section we have your personal information:
+                    <p></p>
+                    IP-Address: $ip
+                    <p></p>
+                    Browser: $browser
+                    <p></p>
+                    Device: $device
+                    <p></p>
+                </div>
+                To activate your personal account you need to type in the 6 digits number<br><p></p>
+                <strong>Your 6-digits number : </strong>$1 $2 $3 $4 $5 $6 <p></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

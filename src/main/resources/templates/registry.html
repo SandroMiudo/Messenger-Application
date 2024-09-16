@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/1bebea7d1c.js" crossorigin="anonymous"></script>
+</head>
+
+<style>
+
+    body{
+        max-width: 350px;
+        margin: 150px auto;
+    }
+
+    .background-icon{
+        background-repeat: no-repeat;
+        background-image: url("/img/messenger.png");
+        background-size: 200px;
+        background-position: center;
+    }
+
+    input{
+        border-style: solid;
+        border-top-color: white;
+        border-bottom-color: lightgray;
+        border-left-color: white;
+        border-right-color: lightgray;
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    .usericon{
+        background-image: url("/img/user.png");
+        background-size: 20px;
+        background-repeat: no-repeat;
+        text-align: center;
+        background-position: 12px 12px;
+    }
+
+    .roundedBorder{
+        border-radius: 20px;
+    }
+
+    .passwordicon{
+        background-image: url("/img/unlock.png");
+        background-size: 20px;
+        background-repeat: no-repeat;
+        text-align: center;
+        background-position: 12px 12px;
+    }
+
+    .submiticon{
+        background-image: url("/img/check-mark.png");
+        background-size: 40px;
+        background-repeat: no-repeat;
+    }
+
+    .emailicon{
+        background-image: url("/img/briefumschlag.png");
+        background-size: 20px;
+        background-repeat: no-repeat;
+        text-align: center;
+        background-position: 12px 12px;
+    }
+
+</style>
+
+<body class="container-fluid" style="background-color: lightgreen;">
+    <div>
+        <form th:action="@{/registry/user}" method="post">
+            <div class="mb-5 background-icon" style="height: 200px;">
+
+            </div>
+            <div class="mb-5">
+                <label hidden for="exampleFormControlInput1" class="form-label">Username</label>
+                <input name="username" type="text" class="form-control-lg usericon roundedBorder w-100" id="exampleFormControlInput1" placeholder="Username">
+                <div th:if="${errorUsername}" class="alert alert-danger alert-dismissible fade show roundedBorder" role="alert">
+                    <strong>Username rejected!</strong> Username is already in use!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="mb-5">
+                <label hidden for="exampleFormControlTextarea1" class="form-label">Password</label>
+                <input name="password" type="password" class="form-control-lg passwordicon roundedBorder w-100" id="exampleFormControlTextarea1" placeholder="Password">
+                <div th:if="${errorPassword}" class="alert alert-danger alert-dismissible fade show roundedBorder" role="alert">
+                    <strong>Password rejected</strong> Password should only contain characters a-z and 0-9!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="mb-5">
+                <label hidden for="emailSec" class="form-label">Email</label>
+                <input name="email" type="email" class="form-control-lg emailicon roundedBorder w-100" id="emailSec" placeholder="example@gmail.com">
+                <div th:if="${errorEmail}" class="alert alert-danger alert-dismissible fade show roundedBorder" role="alert">
+                    <strong>E-Mail rejected</strong> Not a valid Email!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="mb-2">
+                <button id="submitButton" class="btn-light w-100 roundedBorder form-control-lg submiticon submittransition" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<style>
+    body{
+        justify-content: center;
+    }
+
+    .DARK_MODE{
+        background-color: black;
+        color: white;
+    }
+
+    .LIGTH_MODE{
+        background-color: white;
+        color: black;
+    }
+
+</style>
+<body th:class="${mode}">
+    <div class="container">
+        <form th:action="@{/messaging/settings/form}" method="post">
+            <input type="checkbox" class="form-check-input" id="checkLightMode" name="light">
+            <label for="checkLightMode" class="form-check-label">Light Mode</label>
+            <input type="checkbox" class="form-check-input" id="checkDarkMode" name="dark">
+            <label for="checkDarkMode" class="form-check-label">Dark Mode</label>
+            <button th:if="${modeItem == null}" type="submit" class="btn btn-outline-dark">Save Settings</button>
+            <button th:if="${modeItem}" type="submit" class="btn btn-outline-light">Save Settings</button>
+        </form>
+    </div>
+</body>
+</html>
